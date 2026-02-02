@@ -1,6 +1,7 @@
 import type { Pool } from 'pg';
 
 let appPool: Pool | undefined;
+let schemaName: string | undefined;
 
 export function registerPool(pool: Pool): void {
   if (appPool) {
@@ -14,4 +15,12 @@ export function getPool(): Pool {
     throw new Error('pg-functions: No se ha registrado un pool. Asegúrate de llamar a registerPool antes de usar getPool.');
   }
   return appPool;
+}
+
+export function setSchema(name: string): void {
+  schemaName = name;
+}
+
+export function getSchema(): string | undefined {
+  return schemaName;
 }

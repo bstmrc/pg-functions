@@ -76,3 +76,4 @@ setLogger(pino({ level: 'info' }));
 | `PgConnection`               | Wrapper de `PoolClient` con manejo de transacciones y logs |
 | `registerPool()`             | Registra el `Pool` global del proyecto                     |
 | `setLogger()`                | Define un logger personalizado                             |
+| `setSchema()`                | Define el nombre del schema a utilizar de la base de datos                            |

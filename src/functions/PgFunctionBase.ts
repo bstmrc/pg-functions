@@ -1,3 +1,4 @@
+import { getSchema } from "../context"
 import { SqlMode } from "../enum/SqlMode.enum"
 import { Base } from "../interfaces/Base"
 
@@ -13,7 +14,8 @@ export abstract class PgFunctionBase implements Base {
     sql(mode: SqlMode = SqlMode.DEFAULT): string {
         const prefix = mode === SqlMode.SCALAR ? 'SELECT' : 'SELECT * FROM'
         const suffix = mode === SqlMode.SCALAR ? ' AS result' : ''
-        return `${prefix} ${this.functionName}(${this.getPlaceHolders()})${suffix};`
+        const schema = getSchema() ? `${getSchema()}.` : ''
+        return `${prefix} ${schema}${this.functionName}(${this.getPlaceHolders()})${suffix};`
     }
 
     getPlaceHolders(): string {
